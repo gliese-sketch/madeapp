@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { HeroUIProvider } from "@heroui/react";
-import { SignUp } from "@/components";
 import { io } from "socket.io-client";
+import { HeroUIProvider } from "@heroui/react";
+import { Messages, Inputs, SignUp } from "@/components";
 
 const socket = io(
   "https://congenial-zebra-69r46pjwvr6vf6pw-8000.app.github.dev/"
@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const session = sessionStorage.getItem("user");
     if (session) {
-      setUser(JSON.parse(session));
+      setUser(session);
     }
   }, []);
 
@@ -26,7 +26,10 @@ export default function Home() {
         {!user ? (
           <SignUp setUser={setUser} socket={socket} />
         ) : (
-          `Welcome ${user.name}`
+          <div className="relative min-h-screen max-h-screen">
+            <Messages />
+            <Inputs />
+          </div>
         )}
       </div>
     </HeroUIProvider>
