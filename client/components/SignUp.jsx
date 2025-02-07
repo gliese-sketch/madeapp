@@ -10,6 +10,7 @@ import {
   Form,
   Input,
 } from "@heroui/react";
+import { ChevronRightIcon } from "lucide-react";
 
 export default function SignUp() {
   const onSubmit = (e) => {
@@ -54,7 +55,9 @@ export default function SignUp() {
               type="text"
               autoComplete="off"
             />
-            <Button type="submit">Join</Button>
+            <Button type="submit" className="gap-0">
+              Join <ChevronRightIcon />
+            </Button>
           </Form>
         </CardBody>
 
