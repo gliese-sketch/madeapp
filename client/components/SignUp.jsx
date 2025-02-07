@@ -12,7 +12,7 @@ import {
 } from "@heroui/react";
 import { ChevronRightIcon } from "lucide-react";
 
-export default function SignUp() {
+export default function SignUp({ setUser }) {
   const onSubmit = (e) => {
     // Prevent default browser page refresh.
     e.preventDefault();
@@ -21,7 +21,7 @@ export default function SignUp() {
     const data = Object.fromEntries(new FormData(e.currentTarget));
 
     // Submit data to your backend API.
-    console.log(data);
+    setUser(data);
   };
 
   return (
