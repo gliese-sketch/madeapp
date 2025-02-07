@@ -11,7 +11,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-
+  /* Add gradient background */
   background-color: rgb(240, 253, 250);
   background-image: radial-gradient(
       at 69% 87%,
