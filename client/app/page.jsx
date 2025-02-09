@@ -8,6 +8,7 @@ const socket = io("https://madeapp-q3r5v.kinsta.app/");
 
 export default function Home() {
   const [user, setUser] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   return (
     <HeroUIProvider>
@@ -16,8 +17,8 @@ export default function Home() {
           <SignUp setUser={setUser} socket={socket} />
         ) : (
           <div className="relative min-h-screen max-h-screen">
-            <Messages />
-            <Inputs socket={socket} name={user} />
+            <Messages messages={messages} id={socket.id} />
+            <Inputs socket={socket} name={user} setMessages={setMessages} />
           </div>
         )}
       </div>
