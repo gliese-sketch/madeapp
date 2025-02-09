@@ -1,6 +1,7 @@
 import http from "http";
 import express from "express";
 import { Server } from "socket.io";
+import axios from "axios";
 
 const app = express();
 const server = http.createServer(app);
@@ -23,8 +24,29 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("new_user", data);
   });
 
-  socket.on("message", (data) => {
-    socket.broadcast.emit("new_message", data);
+  socket.on("message", async (data) => {
+    if (data.content.startswith("@ai")) {
+      console.log("AI Detected");
+
+      const options = {
+        method: "POST",
+        url: "https://api.wakati.tech/ai",
+        headers: { "Content-Type": "application/json" },
+        body: {
+          prompt: data.content.replaceAll("@ai"),
+        },
+      };
+
+      try {
+        const { data } = await axios.request(options);
+        const newMsg = { ...data, content: data };
+        socket.broadcast.emit("new_message", newMsg);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      socket.broadcast.emit("new_message", data);
+    }
   });
 
   socket.on("typing", (data) => {
