@@ -6,8 +6,6 @@ import { io } from "socket.io-client";
 
 const socket = io("https://madeapp-q3r5v.kinsta.app/");
 
-console.log(socket);
-
 export default function Home() {
   const [user, setUser] = useState(null);
 
@@ -19,7 +17,7 @@ export default function Home() {
         ) : (
           <div className="relative min-h-screen max-h-screen">
             <Messages />
-            <Inputs socket={socket} />
+            <Inputs socket={socket} name={user} />
           </div>
         )}
       </div>
