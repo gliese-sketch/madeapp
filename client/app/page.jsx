@@ -4,7 +4,9 @@ import { HeroUIProvider } from "@heroui/react";
 import { Messages, Inputs, SignUp } from "@/components";
 import { io } from "socket.io-client";
 
-const socket = io("https://madeapp-q3r5v.kinsta.app/");
+const socket = io(
+  "https://congenial-zebra-69r46pjwvr6vf6pw-8080.app.github.dev"
+);
 
 export default function Home() {
   const [user, setUser] = useState(null);
